@@ -11,11 +11,13 @@ struct singleList
 
 void insert(slist *head,int a);
 
-void removeL(slist *head);
+void removeL(slist *head, int elem);
+void deletebyPos(slist *head, int pos);
 
 void deleteList(slist *head);
 
 void display (slist head);
+
 
 slist newNode(int a);
 slist createList(int m);
