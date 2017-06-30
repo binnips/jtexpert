@@ -15,7 +15,16 @@ slist createList(int m)
 	slist t = newNode(m);
 	return t;
 }
-
+int len(slist L)
+{
+	int count = 0;
+	while(L != NULL)
+	{
+		count++;
+		L = L->next;
+	}
+	return count;
+}
 void display(slist L)
 {
 	if(!L)
@@ -31,6 +40,14 @@ void display(slist L)
 	printf("\n");
 }
 
+void modify(slist l, int m)
+{
+	while(l!=NULL)
+	{
+		l->a = (l->a) * m;
+		l = l->next;
+	}
+}
 
 void insert(slist *L , int m)
 {
@@ -107,6 +124,18 @@ void deletebyPos(slist *head, int pos)
 	curr = NULL;
 }
 
+int find(slist L, int key)
+{
+	int index = -1;
+	while(L!=NULL)
+	{
+		index++;
+		if(L->a == key)
+			break;
+		L = L->next;
+	}
+	return index;
+}
 
 /*
  * Main driver program to test the functions
@@ -130,9 +159,11 @@ int main()
 	insert(&mList,3);
 	insert(&mList,332);
 	display(mList);
-	deletebyPos(&mList,1);
+	printf("Len of list :%d \n",len(mList));
+	int index = find(mList,12);
+	printf("Find the element at index : %d \n",index);
+	modify(mList,10);
 	display(mList);
-	deletebyPos(&mList,133);
 
 
 }
