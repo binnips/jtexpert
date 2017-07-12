@@ -137,6 +137,59 @@ int find(slist L, int key)
 	return index;
 }
 
+slist findNth(slist L, int n)
+{
+	int index = 0;
+	while(L!=NULL)
+	{
+		if (index == n)
+			break;
+		L = L->next;
+		index ++;
+	}
+	return L;
+}
+
+slist findNthfromend(slist l, int n)
+{
+	slist r = l;
+	int i = 0,found =0;
+	
+	while(l)
+	{
+		if( i == n)
+		{
+			found = 1;
+			while(l){
+				r = r->next;
+				l = l->next;
+			}
+			break;
+		}
+		l = l->next;
+		i++;
+	}
+	if(!found)
+		return NULL;
+	return r;
+
+}
+
+slist middle(slist l)
+{
+	slist slow = l;
+	slist fast = l;
+	
+	while(fast != NULL)
+	{
+		fast = fast ->next;
+		if(fast == NULL)
+			break;
+		fast = fast ->next;
+		slow = slow ->next;
+	}
+	return slow;
+}
 /*
  * Main driver program to test the functions
  */
@@ -158,12 +211,35 @@ int main()
 	display(mList);
 	insert(&mList,3);
 	insert(&mList,332);
+	insert(&mList,33);
+	insert(&mList,31);
+	insert(&mList,12);
+	insert(&mList,2);
+	insert(&mList,3);
 	display(mList);
 	printf("Len of list :%d \n",len(mList));
 	int index = find(mList,12);
 	printf("Find the element at index : %d \n",index);
 	modify(mList,10);
 	display(mList);
+	slist r = findNth(mList,5);
+	if(r!=NULL)
+	{
+		printf("3rd index %d \n",r->a);
+	}
+	else
+		printf("Nothing got \n");
+	slist r1 = middle(mList);
+	if(r1 != NULL)
+	{
+		printf("middle %d \n",r1->a);
+	}
+	else
+		printf("Nothing got \n");
 
 
+	slist f = findNthfromend(mList,2);
+	printf("Found : %d \n",f->a);
 }
+
+
