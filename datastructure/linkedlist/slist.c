@@ -190,6 +190,36 @@ slist middle(slist l)
 	}
 	return slow;
 }
+
+
+slist addsorted(slist *r, int x)
+{
+	slist l = *r;
+	if(!l)
+	{
+		slist t = newNode(x);
+		return t;
+	}
+	while(l  != NULL)
+	{
+		if(l->next->a > x)
+		{
+			l = l->next;
+		}
+		else
+		{
+			slist m = newNode(x);
+			m->next = l->next;
+			l->next = m;
+			return *r;
+		}
+	}
+
+	slist m = newNode(x);
+	m -> next = NULL;
+	l -> next = m;
+	return *r;
+}
 /*
  * Main driver program to test the functions
  */
@@ -198,14 +228,13 @@ int main()
 {
 	slist mList= NULL;
 
-	mList = createList(11);
-	insert(&mList,22);
-	insert(&mList,42);
+	mList = createList(1);
+	insert(&mList,2);
+	insert(&mList,4);
 	insert(&mList,12);
+	mList = addsorted(&mList,10);
 	display(mList);
-	removeL(&mList,42);
-	display(mList);
-	removeL(&mList,4);
+/*	removeL(&mList,4);
 	display(mList);
 	removeL(&mList,11);
 	display(mList);
@@ -240,6 +269,7 @@ int main()
 
 	slist f = findNthfromend(mList,2);
 	printf("Found : %d \n",f->a);
+*/
 }
 
 
